@@ -171,3 +171,4 @@ curl -X POST http://localhost:3000/habits/:id/log \
 - **Error Response:**
   - **Code:** 404 Not Found
   - **Content:** `"Habit not found."`
+# BlogX
