@@ -88,9 +88,21 @@ app.post("/habits/:id/log", (req, res) => {
 });
 
 app.get("/habits", (req, res) => {
+  const { page = 1, limit = 10 } = req.query;
+
+  const pageNumber = parseInt(page as string, 10);
+  const limitNumber = parseInt(limit as string, 10);
+
+  const startIndex = (pageNumber - 1) * limitNumber;
+  const endIndex = startIndex + limitNumber;
+
+  const paginatedHabits = habits.slice(startIndex, endIndex);
+
   res.json({
-    habits,
+    habits: paginatedHabits,
     total: habits.length,
+    currentPage: pageNumber,
+    totalPages: Math.ceil(habits.length / limitNumber),
   });
 });
 
